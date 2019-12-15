@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<style>
+    .readBox {
+        height: 200px;
+        width: 50%;
+        background-color: #d5f00e;
+        align-self: center;
+        margin-top: 100px;
+        margin-bottom: 100px;
+        margin-right: 0px;
+        margin-left: 0px;
+
+        padding-top: 50px;
+        padding-right: 50px;
+        ;
+        padding-bottom: 50px;
+        padding-left: 50px;
+    }
+
+    .baseBox {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        margin-right: 20px;
+        margin-left: 20px;
+
+        padding-top: 20px;
+        padding-right: 20px;
+        ;
+        padding-bottom: 20px;
+        padding-left: 20px;
+
+    }
+
+    .incorrect {
+        color: #FF0000;
+        display: inline
+    }
+
+    .correct {
+        color: #008000;
+        display: inline;
+    }
+
+    .unreached {
+        color: #696969;
+        display: inline;
+    }
+
+    .bigtable {
+
+        width: 90%;
+        align-self: center;
+        margin-top: 100px;
+        margin-bottom: 100px;
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+
+    .clock_normal {
+        font-size: 30px;
+        color: #008000;
+    }
+</style>
+
+<body>
+    <div class="baseBox">
+        <p id="started"></p>
+        <table class="bigtable">
+            <tr>
+                <td>
+                    <div class="readBox">
+                        <p id="readBoxData"></p>
+                    </div>
+                </td>
+                <td>
+                    <p id="timeBlock"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>TYPE DOWN HERE </p>
+                    <textarea rows="4" cols="50" id="textArea">
+            </textarea>
+                </td>
+            </tr>
+            <tr>
+                <div name="debug">
+                    <p id="debugP"></p>
+                    </p>
+                </div>
+
+            </tr>
+        </table>
+
+        <script>
+
+            // INIT CODE
+            var currentIndex = -1
+            var breakIndex = -1
+            var broken = false
+            var CLOCK_STOP
+            var PRE_CLOCK_STOP
+            var clockTime = 0
+            const CLOCK_CLOSE_TIME = 120
+            const PRE_START_CLOSE_TIME = 5
+            var preStartTime = 0
+            const paragraphs  = {data:[{paragraph:"The robot clicked disapprovingly, gurgled briefly inside its cubical interior and extruded a pony glass of brownish liquid. \",Sir, you will undoubtedly end up in a drunkard's grave, dead of hepatic cirrhosis,\" it informed me virtuously as it returned my ID card. I glared as I pushed the glass across the table."},{paragraph:"If you can imagine a furry humanoid seven feet tall, with the face of an intelligent gorilla and the braincase of a man, you'll have a rough idea of what they looked like -- except for their teeth. The canines would have fitted better in the face of a tiger, and showed at the corners of their wide, thin-lipped mouths, giving them an expression of ferocity."},{paragraph:"The trees, therefore, must be such old and primitive techniques that they thought nothing of them, deeming them so inconsequential that even savages like us would know of them and not be suspicious. At that, they probably didn't have too much time after they detected us orbiting and intending to land. And if that were true, there could be only one place where their civilization was hidden."},{paragraph:"Turning away from the ledge, he started slowly down the mountain, deciding that he would, that very night, satisfy his curiosity about the man-house. In the meantime, he would go down into the canyon and get a cool drink, after which he would visit some berry patches just over the ridge, and explore among the foothills a bit before his nap-time, which always came just after the sun[31] had walked past the middle of the sky. At that period of the day the sun’s warm rays seemed to cast a sleepy spell over the silent mountainside, so all of the animals, with one accord, had decided it should be the hour for their mid-day sleep."},{paragraph:"It went through such rapid contortions that the little bear was forced to change his hold on it so many times he became confused in the darkness, and could not, for the life of him, tell whether he held the sheep right side up, or upside down. But that point was decided for him a moment later by the animal itself, who, with a sudden twist,[52] jabbed its horns so hard into his lowest ribs that he gave a grunt of anger and disgust."},{paragraph:"Since they are still preserved in the rocks for us to see, they must have been formed quite recently, that is, geologically speaking. What can explain these striations and their common orientation? Did you ever hear about the Great Ice Age or the Pleistocene Epoch? Less than one million years ago, in fact, some 12,000 years ago, an ice sheet many thousands of feet thick rode over Burke Mountain in a southeastward direction. The many boulders frozen to the underside of the ice sheet tended to scratch the rocks over which they rode. The scratches or striations seen in the park rocks were caused by these attached boulders. The ice sheet also plucked and rounded Burke Mountain into the shape it possesses today."},{paragraph:"According to the caption on the bronze marker placed by the Multnomah Chapter of the Daughters of the American Revolution on May 12, 1939, “College Hall (is) the oldest building in continuous use for Educational purposes west of the Rocky Mountains. Here were educated men and women who have won recognition throughout the world in all the learned professions.”"},{paragraph:"A long black shadow slid across the pavement near their feet and the five Venusians, very much startled, looked overhead. They were barely in time to see the huge gray form of the carnivore before it vanished behind a sign atop a nearby building which bore the mystifying information \"Pepsi-Cola.\""},{paragraph:"Out of another, I get a lovely view of the bay and a little private wharf belonging to the estate. There is a beautiful shaded lane that runs down there from the house. I always fancy I see people walking in these numerous paths and arbors, but John has cautioned me not to give way to fancy in the least. He says that with my imaginative power and habit of story-making a nervous weakness like mine is sure to lead to all manner of excited fancies and that I ought to use my will and good sense to check the tendency. So I try."},{paragraph:"Her eyebrows were a shade darker than her hair. They were thick and almost horizontal, emphasizing the depth of her eyes. She was rather handsome than beautiful. Her face was captivating by reason of a certain frankness of expression and a contradictory subtle play of features. Her manner was engaging."},{paragraph:"Indescribable oppression, which seemed to generate in some unfamiliar part of her consciousness, filled her whole being with a vague anguish. It was like a shadow, like a mist passing across her soul's summer day. It was strange and unfamiliar; it was a mood. She did not sit there inwardly upbraiding her husband, lamenting at Fate, which had directed her footsteps to the path which they had taken. She was just having a good cry all to herself. The mosquitoes made merry over her, biting her firm, round arms and nipping at her bare insteps."},{paragraph:"Then came the night of the first falling star. It was seen early in the morning, rushing over Winchester eastward, a line of flame high in the atmosphere. Hundreds must have seen it and taken it for an ordinary falling star. It seemed that it fell to earth about one hundred miles east of him."},{paragraph:"I recollect that my first exploit in squirrel-shooting was in a grove of tall walnut-trees that shades one side of the valley. I had wandered into it at noontime, when all nature is peculiarly quiet, and was startled by the roar of my own gun, as it broke the Sabbath stillness around and was prolonged and reverberated by the angry echoes."},{paragraph:"There wasn't a bird in the sky, but that was not what caught her attention. It was the clouds. The deep green that isn't the color of clouds, but came with these. She knew what was coming and she hoped she was prepared."},{paragraph:"The boy walked down the street in a carefree way, playing without notice of what was about him. He didn't hear the sound of the car as his ball careened into the road. He took a step toward it, and in doing so sealed his fate."},{paragraph:"The chair sat in the corner where it had been for over 25 years. The only difference was there was someone actually sitting in it. How long had it been since someone had done that? Ten years or more he imagined. Yet there was no denying the presence in the chair now."},{paragraph:"The red ball sat proudly at the top of the toybox. It had been the last to be played with and anticipated it would be the next as well. The other toys grumbled beneath. At one time each had held the spot of the red ball, but over time they had sunk deeper and deeper into the toy box."},{paragraph:"What were they eating? It didn't taste like anything she had ever eaten before and although she was famished, she didn't dare ask. She knew the answer would be one she didn't want to hear."},{paragraph:"Sometimes that's just the way it has to be. Sure, there were probably other options, but he didn't let them enter his mind. It was done and that was that. It was just the way it had to be."},{paragraph:"There was no time. He ran out of the door without half the stuff he needed for work, but it didn't matter. He was late and if he didn't make this meeting on time, someone's life may be in danger."},{paragraph:"She tried not to judge him. His ratty clothes and unkempt hair made him look homeless. Was he really the next Einstein as she had been told? On the off chance it was true, she continued to try not to judge him."},{paragraph:"He heard the crack echo in the late afternoon about a mile away. His heart started racing and he bolted into a full sprint. \"It wasn't a gunshot, it wasn't a gunshot,\" he repeated under his breathlessness as he continued to sprint."},{paragraph:"Sometimes there isn't a good answer. No matter how you try to rationalize the outcome, it doesn't make sense. And instead of an answer, you are simply left with a question. Why?"},{paragraph:"The computer wouldn't start. She banged on the side and tried again. Nothing. She lifted it up and dropped it to the table. Still nothing. She banged her closed fist against the top. It was at this moment she saw the irony of trying to fix the machine with violence."},{paragraph:"What was beyond the bend in the stream was unknown. Both were curious, but only one was brave enough to want to explore. That was the problem. There was always one that let fear rule her life."},{paragraph:"Eating raw fish didn't sound like a good idea. \"It's a delicacy in Japan,\" didn't seem to make it any more appetizing. Raw fish is raw fish, delicacy or not."},{paragraph:"He couldn't move. His head throbbed and spun. He couldn't decide if it was the flu or the drinking last night. It was probably a combination of both."},{paragraph:"Where do they get a random paragraph?\" he wondered as he clicked the generate button. Do they just write a random paragraph or do they get it somewhere? At that moment he read the random paragraph and realized it was about random paragraphs and his world would never be the same."},{paragraph:"It was going to rain. The weather forecast didn't say that, but the steel plate in his hip did. He had learned over the years to trust his hip over the weatherman. It was going to rain, so he better get outside and prepare."},{paragraph:"It was a weird concept. Why would I really need to generate a random paragraph? Could I actually learn something from doing so? All these questions were running through her head as she pressed the generate button. To her surprise, she found what she least expected to see."},{paragraph:"It's always good to bring a slower friend with you on a hike. If you happen to come across bears, the whole group doesn't have to worry. Only the slowest in the group do. That was the lesson they were about to learn that day."},{paragraph:"I'm heading back to Colorado tomorrow after being down in Santa Barbara over the weekend for the festival there. I will be making October plans once there and will try to arrange so I'm back here for the birthday if possible. I'll let you know as soon as I know the doctor's appointment schedule and my flight plans."},{paragraph:"I've rented a car in Las Vegas and have reserved a hotel in Twentynine Palms which is just north of Joshua Tree. We'll drive from Las Vegas through Mojave National Preserve and possibly do a short hike on our way down. Then spend all day on Monday at Joshua Tree. We can decide the next morning if we want to do more in Joshua Tree or Mojave before we head back."},{paragraph:"I haven't bailed on writing. Look, I'm generating a random paragraph at this very moment in an attempt to get my writing back on track. I am making an effort. I will start writing consistently again!"},{paragraph:"Don't be scared. The things out there that are unknown aren't scary in themselves. They are just unknown at the moment. Take the time to know them before you list them as scary. Then the world will be a much less scary place for you."},{paragraph:"You can decide what you want to do in life, but I suggest doing something that creates. Something that leaves a tangible thing once you're done. That way even after you're gone, you will still live on in the things you created."},{paragraph:"Do you think you're living an ordinary life? You are so mistaken it's difficult to even explain. The mere fact that you exist makes you extraordinary. The odds of you existing are less than winning the lottery, but here you are. Are you going to let this extraordinary opportunity pass?"},{paragraph:"Cake or pie? I can tell a lot about you by which one you pick. It may seem silly, but cake people and pie people are really different. I know which one I hope you are, but that's not for me to decide. So, what is it? Cake or pie?"},{paragraph:"What have you noticed today? I noticed that if you outline the eyes, nose, and mouth on your face with your finger, you make an \"I\" which makes perfect sense, but is something I never noticed before. What have you noticed today?"},{paragraph:"She looked at her student wondering if she could ever get through. \"You need to learn to think for yourself,\" she wanted to tell him. \"Your friends are holding you back and bringing you down.\" But she didn't because she knew his friends were all that he had and even if that meant a life of misery, he would never give them up."},{paragraph:"It was a question of which of the two she preferred. On the one hand, the choice seemed simple. The more expensive one with a brand name would be the choice of most. It was the easy choice. The safe choice. But she wasn't sure she actually preferred it."},{paragraph:"Was it enough? That was the question he kept asking himself. Was being satisfied enough? He looked around him at everyone yearning to just be satisfied in their daily life and he had reached that goal. He knew that he was satisfied and he also knew it wasn't going to be enough."},{paragraph:"Stranded. Yes, she was now the first person ever to land on Venus, but that was of little consequence. Her name would be read by millions in school as the first to land here, but that celebrity would never actually be seen by her. She looked at the control panel and knew there was nothing that would ever get it back into working order. She was the first and it was not clear this would also be her last."},{paragraph:"One dollar and eighty-seven cents. That was all. And sixty cents of it was in pennies. Pennies saved one and two at a time by bulldozing the grocer and the vegetable man and the butcher until one’s cheeks burned with the silent imputation of parsimony that such close dealing implied. One dollar and eighty-seven cents. And the next day would be Christmas..."},{paragraph:"She wondered if the note had reached him. She scolded herself for not handing it to him in person. She trusted her friend, but so much could happen. She waited impatiently for word."},{paragraph:"He sat across from her trying to imagine it was the first time. It wasn't. Had it been a hundred? It quite possibly could have been. Two hundred? Probably not. His mind wandered until he caught himself and again tried to imagine it was the first time."},{paragraph:"Colors bounced around in her head. They mixed and threaded themselves together. Even colors that had no business being together. They were all one, yet distinctly separate at the same time. How was she going to explain this to the others?"},{paragraph:"He looked at the sand. Picking up a handful, he wondered how many grains were in his hand. Hundreds of thousands? \"Not enough,\" the said under his breath. I need more."},{paragraph:"Things aren't going well at all with mom today. She is just a limp noodle and wants to sleep all the time. I sure hope that things get better soon."},{paragraph:"I'm going to hire professional help tomorrow. I can't handle this anymore. She fell over the coffee table and now there is blood in her catheter. This is much more than I ever signed up to do."},{paragraph:"Do you really listen when you are talking with someone? I have a friend who listens in an unforgiving way. She actually takes every word you say as being something important and when you have a friend that listens like that, words take on a whole new meaning."},{paragraph:"Here's the thing. She doesn't have anything to prove, but she is going to anyway. That's just her character. She knows she doesn't have to, but she still will just to show you that she can. Doubt her more and she'll prove she can again. We all already know this and you will too."},{paragraph:"This is important to remember. Love isn't like pie. You don't need to divide it among all your friends and loved ones. No matter how much love you give, you can always give more. It doesn't run out, so don't try to hold back giving it as if it may one day run out. Give it freely and as much as you want."},{paragraph:"He wondered if he should disclose the truth to his friends. It would be a risky move. Yes, the truth would make things a lot easier if they all stayed on the same page, but the truth might fracture the group leaving everything in even more of a mess than it was not telling the truth. It was time to decide which way to go."},{paragraph:"It was difficult to explain to them how the diagnosis of certain death had actually given him life. While everyone around him was in tears and upset, he actually felt more at ease. The doctor said it would be less than a year. That gave him a year to live, something he'd failed to do with his daily drudgery of a routine that had passed as life until then."}]}
+            var data = getRandomParagraph()
+            // var data = "a b c d e f g h "
+            var values = data.split("")
+
+            document.getElementById("textArea").addEventListener("keydown", myKeyDown)
+            updateReadBox()
+            document.getElementById("textArea").addEventListener("keypress", myKeyPress)
+            updateClockDisplay(0)
+            blockTextArea()
+            //
+            // TIME HANDLER
+            //
+            function startCoundown() {
+                clockTime++
+                updateClockDisplay(clockTime)
+                if (clockTime >= CLOCK_CLOSE_TIME) {
+                    clearInterval(CLOCK_STOP)
+                    completed()
+                }
+            }
+            function mainClockInit() {
+
+                CLOCK_STOP = setInterval(startCoundown, 1000)
+                unblockTextArea()
+                focusTextArea()
+            }
+            function preInit() {
+                preStartTime++
+                updatePreMessage("STARTING IN " + (PRE_START_CLOSE_TIME - preStartTime))
+                if (preStartTime >= PRE_START_CLOSE_TIME) {
+                    updatePreMessage("STARTED, START TYPING")
+                    clearInterval(PRE_CLOCK_STOP)
+                    mainClockInit()
+                }
+
+            }
+            PRE_CLOCK_STOP = setInterval(preInit, 1000)
+
+            //
+            // EVENT HANDLER
+            //
+            function init() {
+                currentIndex = -1
+                breakIndex = -1
+                broken = false
+                CLOCK_STOP
+                clockTime = 0
+                preStartTime = 0
+                data = getRandomParagraph()
+                values = data.split("")
+                updateReadBox()
+                updateClockDisplay(0)
+                blockTextArea()
+                clearTextArea()
+                PRE_CLOCK_STOP = setInterval(preInit, 1000)
+            }
+
+            function completed() {
+                clearInterval(CLOCK_STOP)
+                blockTextArea()
+                time_taken = clockTime
+                textCovered = (values.slice(0, currentIndex + 1)).join("")
+                wordsCovered = textCovered.split(" ")
+                alert("YOUR SPEED IS " + (Math.floor((wordsCovered.length / time_taken) * 60)) + " WPM!")
+                setTimeout(init, 10000)
+            }
+
+            //
+            // KEYBOARD EVENT HANDLER
+            //
+            function myKeyPress(e) {
+                var keynum;
+
+                if (window.event) {
+                    keynum = e.keyCode;
+                } else if (e.which) {
+                    keynum = e.which;
+                }
+
+                switch (keynum) {
+                    case 8:
+                        backSpace()
+                        break;
+
+                    default:
+                        evaluateKeyPressEvent(keynum)
+
+                }
+                updateReadBox()
+            }
+
+            function myKeyDown(e) {
+                var keynum;
+                if (window.event) {
+                    keynum = e.keyCode;
+                } else if (e.which) {
+                    keynum = e.which;
+                }
+
+                switch (keynum) {
+                    case 8:
+                        backSpace()
+                        break;
+                }
+                updateReadBox()
+            }
+            function evaluateKeyPressEvent(keynum) {
+                if (filterOutKeys(keynum))
+                    return;
+                currentIndex = currentIndex + 1
+                var currentChar = values[currentIndex]
+                if (String.fromCharCode(keynum) != currentChar) {
+                    if (breakIndex == -1) {
+                        breakIndex = currentIndex
+                    }
+                    broken = true
+                }
+                else {
+                    if (currentIndex == breakIndex) {
+                        breakIndex = -1
+                        broken = false
+                    }
+                }
+                if (String.fromCharCode(keynum) == currentChar && !broken) {
+                    updateDebugP("typed :" + String.fromCharCode(keynum) + ' <p class="correct">expected: ' + currentChar + " " + currentIndex + "" + '</p>')
+                }
+                else {
+                    updateDebugP("typed :" + String.fromCharCode(keynum) + ' <p class="incorrect">expected: ' + currentChar + " " + currentIndex + "" + '</p>')
+                }
+                if (currentIndex == values.length - 1 && !broken) {
+                    completed()
+                }
+            }
+
+            function filterOutKeys(keynum) {
+                if (keynum <= 31) {
+                    return true;
+                }
+                return false
+            }
+
+            function backSpace() {
+                updateDebugP("backspaced")
+                if (breakIndex > currentIndex && breakIndex != -1) {
+                    broken = false
+                    breakIndex = -1
+                }
+                if (currentIndex != -1) {
+                    currentIndex--;
+                }
+
+            }
+
+            //
+            // DOCUMENT HANDLERS
+            //
+            function updateReadBox() {
+                var finalString = []
+                if (broken) {
+                    //set un broken string
+                    finalString.push('<p class="correct">')
+                    finalString.push((values.slice(0, breakIndex)).join(""))
+                    finalString.push('</p>')
+                    //set broken string
+                    finalString.push('<p class="incorrect">')
+                    finalString.push((values.slice(breakIndex, currentIndex + 1)).join(""))
+                    finalString.push('</p>')
+                    //set unreached string
+                    finalString.push('<p class="unreached">')
+                    finalString.push((values.slice(currentIndex + 1, values.length + 1)).join(""))
+                    finalString.push('</p>')
+                }
+                else {
+                    //set broken string
+
+                    finalString.push('<p class="correct">')
+                    finalString.push((values.slice(0, currentIndex + 1)).join(""))
+                    finalString.push('</p>')
+                    //set unreached string
+                    finalString.push('<p class="unreached">')
+                    finalString.push((values.slice(currentIndex + 1, values.length + 1)).join(""))
+                    finalString.push('</p>')
+                }
+                document.getElementById("readBoxData").innerHTML = finalString.join("")
+            }
+
+            function updateDebugP(str) {
+                document.getElementById('debugP').innerHTML = str
+            }
+
+            function updateClockDisplay(c_time) {
+                time = CLOCK_CLOSE_TIME - c_time
+                sufffix = time % 60 > 10 ? ("" + time % 60) : ("0" + time % 60)
+                prefix = time / 60 > 10 ? ("" + Math.floor(time / 60)) : ("0" + Math.floor(time / 60))
+                clas = "clock_normal"
+                document.getElementById("timeBlock").innerHTML = '<p class="' + clas + '">' + prefix + ":" + sufffix + '</p>'
+            }
+
+            function blockTextArea() {
+                document.getElementById("textArea").disabled = true
+            }
+
+            function unblockTextArea() {
+                document.getElementById("textArea").disabled = false
+            }
+
+            function clearTextArea() {
+                document.getElementById("textArea").innerHTML = ""
+            }
+
+            function focusTextArea() {
+                document.getElementById("textArea").focus();
+
+            }
+
+            function updatePreMessage(str) {
+                document.getElementById("started").innerHTML = str;
+            }
+
+            //
+            // PARAGRAPH DATA
+            //
+            
+            
+            function getRandomParagraph() {
+                console.log(paragraphs)
+                try {
+                    return paragraphs.data[Math.floor(Math.random() * paragraphs.data.length)].paragraph
+
+                }
+                catch (e) {
+                    console.log("ERROR!!", e)
+                }
+            }
+           
+        </script>
+    </div>
+</body>
+
+</html>
